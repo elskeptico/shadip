@@ -1,4 +1,4 @@
-import GlslCanvas from './glsl-canvas';
+import GlslCanvas from './glsl-canvas.js';
 
 const canvas = document.querySelector(".glsl-canvas");
 const sandbox = new GlslCanvas(canvas);
