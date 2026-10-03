@@ -1,6 +1,8 @@
+import GlslCanvas from 'glsl-canvas-js';
+
 let number;
 let numarray;
-const canvas = document.querySelector(".glslCanvas");
+const canvas = document.querySelector(".glsl-canvas");
 const sandbox = new GlslCanvas(canvas);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -22,13 +24,13 @@ async function getip() {
 function getrandomnumbers() {
     let num;
     for (let i=0; i<=10; i++) {
-        let newnum = Math.floor(Math.random()).toString;
+        let newnum = Math.floor(Math.random() * 10).toString;
         num += newnum;
     }
 }
 
 if (localStorage.getItem("allowed") == "true") {
-    number = getip();
+    number = await getip();
 } else if (localStorage.getItem("allowed") == "false") {
     number = getrandomnumbers();
 } else {
