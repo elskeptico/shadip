@@ -1,4 +1,4 @@
-import GlslCanvas from 'glsl-canvas-js';
+//import GlslCanvas from 'glsl-canvas-js';
 
 let number;
 let numarray;
