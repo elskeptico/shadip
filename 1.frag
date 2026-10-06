@@ -2,16 +2,24 @@
 precision mediump float;
 #endif
 
-uniform vec2 u_resolution
-uniform float u_time;
+#extension GL_OES_standard_derivatives : enable
 
-uniform vec3 u_color1;
-uniform vec3 u_color2;
-uniform float u_speed;
+precision highp float;
 
-void main() {
-    vec2 st = gl_FragCoord.xy / u_resolution.xy;
-    float wave = sin(st.x * 10.0 + u_time * u_speed) * 0.5 + 0.5
-    vec3 finalColor = mix(u_color1, u_color1, wave);
-    gl_FragColor = vec4(finalColor, 1.0);
+uniform float time;
+uniform vec2 mouse;
+uniform vec2 resolution;
+
+void main( void ) {
+
+	vec2 position = ( gl_FragCoord.xy / resolution.xy ) + mouse / 4.0;
+
+	float color = 0.0;
+	color += sin( position.x * cos( time / 15.0 ) * 80.0 ) + cos( position.y * cos( time / 15.0 ) * 10.0 );
+	color += sin( position.y * sin( time / 10.0 ) * 40.0 ) + cos( position.x * sin( time / 25.0 ) * 40.0 );
+	color += sin( position.x * sin( time / 5.0 ) * 10.0 ) + sin( position.y * sin( time / 35.0 ) * 80.0 );
+	color *= sin( time / 10.0 ) * 0.5;
+
+	gl_FragColor = vec4( vec3( color, color * 6.4, sin( color + time / 3.0 ) * 0.75 ), 1.0 );
+
 }

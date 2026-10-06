@@ -29,6 +29,7 @@ function getrandomnumbers() {
         let newnum = Math.floor(Math.random() * 10).toString;
         num += newnum;
     }
+    return num;
 }
 
 const ip = getip();
@@ -36,7 +37,7 @@ const ip = getip();
 //const fragfile = ip[1].toString + '.frag'
 //const vertfile = ip[2].toString + '.vert'
 
-fetch('2.frag')
+fetch('1.frag')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load shader: ${response.statusText}`);
@@ -44,13 +45,10 @@ fetch('2.frag')
         return response.text();
     })
     .then(shaderCode => {
-        // Load the shader code into GlslCanvas
         sandbox.load(shaderCode);
 
-        // Define your custom JS variables
         const array = [ip[4], ip[5], ip[6]]
 
-        // Set your custom uniforms
         sandbox.setUniform('var_1', ip[3]);
         sandbox.setUniform('color_2', array); 
         sandbox.setUniform('var_3', ip[7]);
