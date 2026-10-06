@@ -30,7 +30,7 @@ function getrandomnumbers() {
     }
 }
 
-const ip = await getip();
+const ip = getip();
 
 const fragfile = ip[1].toString + '.frag'
 const vertfile = ip[2].toString + '.vert'
@@ -45,7 +45,7 @@ fetch('2.frag')
     .then(shaderCode => {
         // Load the shader code into GlslCanvas
         sandbox.load(shaderCode);
-        
+
         // Define your custom JS variables
         const array = [ip[4], ip[5], ip[6]]
 
