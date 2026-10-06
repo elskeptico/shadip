@@ -22,6 +22,7 @@ async function getip() {
 }
 
 
+
 function getrandomnumbers() {
     let num;
     for (let i=0; i<=10; i++) {
@@ -57,5 +58,3 @@ fetch('2.frag')
     .catch(error => {
         console.error("Error loading the shader file:", error);
     });
-
-sandbox.load(shader);
