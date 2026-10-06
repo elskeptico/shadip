@@ -5,7 +5,8 @@ I learned a ton during this project, including:
 * how to use hackatime
 * some really basic fragment shader stuff
 * glslcanvas
-* asnchronous (i mispelled that but its late so i dont care) functions
+* asynchronous functions and promises and stuff
+* json as it pertains to the actual language its for and not just minecraft
 i plan to update it to include a lot more variety (see those extra files? yeah it was out of scope but it wont be forever)
 
 <sup><sub>yeah its</sub></sup><br>

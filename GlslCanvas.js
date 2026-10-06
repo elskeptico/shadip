@@ -1341,16 +1341,7 @@ var GlslCanvas = function () {
         contextOptions = contextOptions || {};
         options = options || {};
 
-        if (canvas.hasAttribute('data-fullscreen') && (canvas.getAttribute('data-fullscreen') == "1" || canvas.getAttribute('data-fullscreen') == "true")) {
-            this.width = window.innerWidth;
-            this.height = window.innerHeight;
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        } else {
-            this.width = canvas.clientWidth;
-            this.height = canvas.clientHeight;
-        }
-
+        
         this.canvas = canvas;
         this.gl = undefined;
         this.deps = {};
