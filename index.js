@@ -1,53 +1,49 @@
-//import GlslCanvas from 'glsl-canvas-js';
+// 3. Define your Fragment Shader string
+        const fragmentShaderSource = `
+            #ifdef GL_ES
+            precision mediump float;
+            #endif
 
-let number;
-let numarray;
-const canvas = document.querySelector(".glsl-canvas");
-const sandbox = new GlslCanvas(canvas);
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+            // Default uniforms provided by GlslCanvas automatically
+            uniform vec2 u_resolution;
+            uniform float u_time;
 
-async function getip() {
-    try {
-        const response = await fetch('https://api.ipify.org?format=json');
-        const data = await response.json();
-        let ip = data.ip;
-        console.log("ip address:" + data.ip);
-        return ip;
-    } catch {
-        alert("Switching to random numbers because something went wrong:" + error);
-        let ip = getrandomnumbers();
-        return ip;
-    }
-}
+            // Custom uniforms passed from JavaScript
+            uniform vec3 u_color1;
+            uniform vec3 u_color2;
+            uniform float u_speed;
 
-function getrandomnumbers() {
-    let num;
-    for (let i=0; i<=10; i++) {
-        let newnum = Math.floor(Math.random() * 10).toString;
-        num += newnum;
-    }
-}
+            void main() {
+                // Normalize pixel coordinates
+                vec2 st = gl_FragCoord.xy / u_resolution.xy;
 
-if (localStorage.getItem("allowed") == "true") {
-    number = await getip();
-} else if (localStorage.getItem("allowed") == "false") {
-    number = getrandomnumbers();
-} else {
-    choosemenu();
-}
+                // Create a moving wave pattern using our custom speed uniform
+                float wave = sin(st.x * 10.0 + u_time * u_speed) * 0.5 + 0.5;
 
-function choosemenu() {
-    let allowed = confirm("This site reads your IP address to generate a shader. Getting your exact address by looking at the shader is nigh impossible, and if you're not showing it to a huge amount of people there's no reason not to allow it. Pressing 'OK' will remember your choice and go forward with the normal logic. Pressing 'cancel' will generate random numbers and use those instead. You can pull this menu back up at any time by pressing space.");
-    if (allowed) {
-        localStorage.s("allowed", "true")
-        number = getip();
-    } else {
-        localStorage.s("allowed", "false")
-        number = getrandomnumbers();
-    }
-}
+                // Mix our two custom colors based on the wave pattern
+                vec3 finalColor = mix(u_color1, u_color2, wave);
 
-for (let char; char<=number.length; char++) {
-    
-}
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        // 4. Initialize GlslCanvas on your canvas element
+        const canvas = document.getElementById('my-shader');
+        const sandbox = new GlslCanvas(canvas);
+
+        // 5. Load the fragment shader string into the canvas
+        sandbox.load(fragmentShaderSource);
+
+        // 6. Set your custom uniforms from JS variables
+        // Format: sandbox.setUniform('uniformName', value);
+        const mySpeedValue = 2.5;
+        
+        sandbox.setUniform('u_speed', mySpeedValue);          // Pass a single float
+        sandbox.setUniform('u_color1', 1.0, 0.4, 0.0);       // Pass vec3 (RGB: Orange)
+        sandbox.setUniform('u_color2', 0.0, 0.8, 1.0);       // Pass vec3 (RGB: Blue)
+
+        // You can update uniforms dynamically at any time (e.g., inside an event)
+        window.addEventListener('click', () => {
+            // Randomize color 2 on click
+            sandbox.setUniform('u_color2', Math.random(), Math.random(), Math.random());
+        });
