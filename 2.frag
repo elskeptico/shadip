@@ -58,4 +58,4 @@ void main() {
     pattern = lines(pos,.5);
 
     gl_FragColor = vec4(vec3(pattern),1.0);
-}
+} 

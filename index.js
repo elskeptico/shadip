@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 
-
+//gets ip of target user, if unable to then just generates random numbers
 async function getip() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
@@ -22,7 +22,7 @@ async function getip() {
 }
 
 
-
+//makes ten random numbers shoves them together and outputs them
 function getrandomnumbers() {
     let num;
     for (let i=0; i<=10; i++) {
@@ -33,10 +33,12 @@ function getrandomnumbers() {
 
 const ip = getip();
 
-//const fragfile = ip[1].toString + '.frag'
-//const vertfile = ip[2].toString + '.vert'
+//get fragment and vertex files based on ip
+const fragfile = ip[1].toString + '.frag'
+const vertfile = ip[2].toString + '.vert'
 
-fetch('2.frag')
+//tries to get fragment file
+fetch(fragfile)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load shader: ${response.statusText}`);
