@@ -34,7 +34,7 @@ function getrandomnumbers() {
 
 const ip = getip();
 
-const fragfile = ip[1].toString + '.frag'
+const fragfile = ip[1].toString() + '.frag'
 
 fetch(fragfile)
     .then(response => {
