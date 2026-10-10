@@ -36,7 +36,7 @@ const ip = getip();
 
 const fragfile = ip[1].toString() + '.frag'
 
-fetch(fragfile)
+fetch('2.frag')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load shader: ${response.statusText}`);
