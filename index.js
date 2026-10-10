@@ -4,7 +4,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 
-//gets ip of target user, if unable to then just generates random numbers
+
 async function getip() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
@@ -22,22 +22,20 @@ async function getip() {
 }
 
 
-//makes ten random numbers shoves them together and outputs them
+
 function getrandomnumbers() {
     let num;
     for (let i=0; i<=10; i++) {
         let newnum = Math.floor(Math.random() * 10).toString;
         num += newnum;
     }
+    return num;
 }
 
 const ip = getip();
 
-//get fragment and vertex files based on ip
 const fragfile = ip[1].toString + '.frag'
-const vertfile = ip[2].toString + '.vert'
 
-//tries to get fragment file
 fetch(fragfile)
     .then(response => {
         if (!response.ok) {
