@@ -32,7 +32,7 @@ function getrandomnumbers() {
     }
     return num;
 }
-getip().then(setip(res));
+getip().then(res => {const ip = res});
 
 fetch('2.frag')
     .then(response => {
