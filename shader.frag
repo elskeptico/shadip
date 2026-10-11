@@ -1,31 +1,25 @@
-
 #ifdef GL_ES
 precision mediump float;
 #endif
 
-uniform float u_time;
 uniform vec2 u_resolution;
-
-void mainImage(out vec4 fragColor, in vec2 fragCoord)
-{
-    // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv = fragCoord / u_resolution.xy;
-
-    // Time-based variables for smooth animation
-    float t = u_time * 1.5;
-    float t1 = sin(t) * 0.5 + 0.5;
-    float t2 = cos(t) * 0.5 + 0.5;
-
-    // Color components
-    float r = sin(2.0 * uv.x + t1) * 0.5 + 0.5;
-    float g = cos(3.0 * uv.y + t2) * 0.5 + 0.5;
-    float b = sin(4.0 * (uv.x + uv.y) + t1 + t2) * 0.5 + 0.5;
-
-    // Output the final color
-    fragColor = vec4(r, g, b, 1.0);
-}
+uniform vec2 u_mouse;
+uniform float u_time;
+uniform float var_1;
+uniform float array_2;
+uniform float var_3;
 
 void main() {
-    mainImage(gl_FragColor, gl_FragCoord.xy);
-}
+    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+    
+    vec2 mouse = u_mouse.xy / u_resolution.xy;
 
+    vec2 toMouse = mouse - st;
+    float dist = length(toMouse);
+
+    float wave = sin(dist * var_3 - u_time * 5.0) * var_1 + var_3;
+
+    vec3 color = vec3(st.x * wave, st.y * (1.0 - wave), wave + mouse.x);
+
+    gl_FragColor = vec4(color, 1.0);
+}

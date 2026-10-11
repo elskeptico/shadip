@@ -31,7 +31,7 @@ function getrandomnumbers() {
 getip().then(iparray => {
     const ip = iparray;
     console.log(ip);
-    fetch('5.frag')
+    fetch('shader.frag')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load shader: ${response.statusText}`);
