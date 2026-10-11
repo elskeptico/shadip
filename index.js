@@ -2,17 +2,17 @@ const canvas = document.querySelector(".glsl-canvas");
 const sandbox = new GlslCanvas(canvas);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
+let ip;
 
 
 async function getip() {
     try {
         const response = await fetch('https://api.ipify.org?format=json');
         const data = await response.json();
-        let ip = data.ip;
-        ip = ip.replaceAll('.', '');
-        let iparray = Array.from(ip, Number);
-        console.log("ip address:" + ip);
+        let ip2 = data.ip;
+        ip2 = ip2.replaceAll('.', '');
+        let iparray = Array.from(ip2, Number);
+        console.log("ip address:" + ip2);
         return iparray;
     } catch {
         alert("Switching to random numbers because something went wrong:" + error);
@@ -32,8 +32,11 @@ function getrandomnumbers() {
     return num;
 }
 
-const ip = getip();
+async function setip() {
+    ip = await getip();
+}
 
+setip();    
 const fragfile = ip[1].toString() + '.frag'
 
 fetch('2.frag')
