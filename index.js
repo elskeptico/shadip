@@ -20,10 +20,6 @@ async function getip() {
     }
 }
 
-function setip(res) {
-    const ip = res;
-}
-
 function getrandomnumbers() {
     let num;
     for (let i=0; i<=10; i++) {
@@ -32,9 +28,10 @@ function getrandomnumbers() {
     }
     return num;
 }
-getip().then(res => {const ip = res});
-
-fetch('2.frag')
+getip().then(iparray => {
+    const ip = iparray;
+    console.log(ip);
+    fetch('2.frag')
     .then(response => {
         if (!response.ok) {
             throw new Error(`Failed to load shader: ${response.statusText}`);
@@ -53,3 +50,4 @@ fetch('2.frag')
     .catch(error => {
         console.error("Error loading the shader file:", error);
     });
+});
