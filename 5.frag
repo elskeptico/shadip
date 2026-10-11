@@ -6,7 +6,7 @@ uniform float var_1;
 uniform float array_2;
 uniform float var_3;
 void main() {
-  highp vec2 tilingResolution = vec2(var_1, var_2);
+  highp vec2 tilingResolution = vec2(var_1, var_3);
   highp vec2 coordinates = gl_FragCoord.xy / resolution;
 
   highp vec2 blockCenter = vec2(0.5, 0.5);
