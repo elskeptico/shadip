@@ -3,7 +3,7 @@ const sandbox = new GlslCanvas(canvas);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let ip = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const ip = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 fetch('2.frag')
     .then(response => {

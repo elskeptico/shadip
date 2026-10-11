@@ -30,7 +30,6 @@ function getrandomnumbers() {
     }
     return num;
 }
-let ip;
 getip().then(res => ip = res);
 
 fetch('2.frag')
