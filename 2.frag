@@ -16,7 +16,7 @@ vec2 triangle_wave(vec2 a,float scale){ return abs(fract((a+vec2(1,.5))*scale)-.
 
 void main()
 {
-    const float t1=15000., scale=var_1;
+    float t1=15000., scale=var_1;
     vec3 c=vec3(0);
     vec2 uv = gl_FragCoord.xy/resolution.y/t1/2.;
     uv -= vec2(5,var_3)*mouse/t1/2.;
