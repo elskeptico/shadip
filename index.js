@@ -20,7 +20,9 @@ async function getip() {
     }
 }
 
-
+function setip(res) {
+    const ip = res;
+}
 
 function getrandomnumbers() {
     let num;
@@ -30,7 +32,7 @@ function getrandomnumbers() {
     }
     return num;
 }
-getip().then(res => ip = res);
+getip().then(setip(res));
 
 fetch('2.frag')
     .then(response => {
